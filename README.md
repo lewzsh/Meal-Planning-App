@@ -6,6 +6,7 @@ Android app for meal planning.
 - Purva Rohan Dalvi
 - Gift Homsaen
 - Patrick Tensen
+- Ameer Kiani
 
 ## Project Description: 
 This app simplifies meal planning by allowing users to add and remove recipes and then it’ll automatically update what ingredients they should buy. 
