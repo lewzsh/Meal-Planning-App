@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MealPlanningApp</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="edit_recipe">Edit Recipe</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="add_instructions">Add instructions</string>
+    <string name="add_ingredients">Add ingredients</string>
+    <string name="add_recipe_name">Add recipe name</string>
+    <string name="title">Title</string>
+</resources>
