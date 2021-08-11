@@ -9,10 +9,15 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class RecipeDetailActivity extends AppCompatActivity {
 
     private TextView titleText, ingredientsText, instructionsText;
     private Recipe selectedRecipe;
+    private SQLiteManager dbManager;
+    private RecipeListHandler recipeLibrary;
+    private ArrayList<Recipe> recipeArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +31,17 @@ public class RecipeDetailActivity extends AppCompatActivity {
         titleText = findViewById(R.id.titleTextView);
         ingredientsText = findViewById(R.id.ingredientsListTextView);
         instructionsText = findViewById(R.id.instructionsTextView);
+
+        dbManager = SQLiteManager.instanceOfDatabase(this);
+        recipeArrayList = dbManager.populateRecipeListArray();
+        recipeLibrary = new RecipeListHandler(recipeArrayList);
     }
 
     private void showRecipe() {
         Intent previousIntent = getIntent();
 
-        int passedRecipeID = previousIntent.getIntExtra(Recipe.RECIPE_EDIT_EXTRA, -1);
-        selectedRecipe = Recipe.getRecipeForID(passedRecipeID);
+        int passedRecipeId = previousIntent.getIntExtra(Recipe.RECIPE_EDIT_ID, -1);
+        selectedRecipe = recipeLibrary.getRecipeForID(passedRecipeId);
 
         if (selectedRecipe != null) {
             titleText.setText(selectedRecipe.getTitle());
@@ -48,7 +57,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     public void editRecipe(View view) {
         Intent editRecipeIntent = new Intent(getApplicationContext(), RecipeEditActivity.class);
-        editRecipeIntent.putExtra(Recipe.RECIPE_EDIT_EXTRA, selectedRecipe.getId());
+        editRecipeIntent.putExtra(Recipe.RECIPE_EDIT_ID, selectedRecipe.getId());
         startActivity(editRecipeIntent);
+    }
+
+    public void makeRecipe(View view) {
     }
 }

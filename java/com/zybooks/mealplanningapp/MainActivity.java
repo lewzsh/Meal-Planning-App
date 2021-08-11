@@ -18,18 +18,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initWidgets();
-        loadFromDBToMemory();
     }
 
     private void initWidgets() {
         recipeLibraryButton = findViewById(R.id.recipeLibraryButton);
         newRecipeButton = findViewById(R.id.newRecipeButton);
         groceryListButton = findViewById(R.id.groceryListButton);
-    }
-
-    private void loadFromDBToMemory() {
-        SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
-        sqLiteManager.populateRecipeListArray();
     }
 
     public void openRecipeLibrary(View view) {

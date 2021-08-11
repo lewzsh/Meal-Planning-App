@@ -6,40 +6,42 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class RecipeLibraryActivity extends AppCompatActivity {
 
-    private ListView recipeListView;
+    private RecipeListHandler recipeLibrary;
+    private SQLiteManager dbManager;
+    private RecipeAdapter recipeAdapter;
+    private RecyclerView recipeListView;
+    private ArrayList<Recipe> recipeArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+
         initWidgets();
         setRecipeAdapter();
-        setOnClickListener();
     }
 
     private void initWidgets() {
         recipeListView = findViewById(R.id.recipeListView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecipeLibraryActivity.this, RecyclerView.VERTICAL, false);
+        recipeListView.setLayoutManager(linearLayoutManager);
     }
 
     private void setRecipeAdapter() {
-        RecipeAdapter recipeAdapter = new RecipeAdapter(getApplicationContext(), Recipe.nonDeletedRecipes());
-        recipeListView.setAdapter(recipeAdapter);
-    }
+        dbManager = SQLiteManager.instanceOfDatabase(this);
+        recipeArrayList = dbManager.populateRecipeListArray();
+        recipeLibrary = new RecipeListHandler(recipeArrayList);
 
-    private void setOnClickListener() {
-        recipeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Recipe selectedRecipe = (Recipe) recipeListView.getItemAtPosition(position);
-                Intent viewRecipeIntent = new Intent(getApplicationContext(), RecipeDetailActivity.class);
-                viewRecipeIntent.putExtra(Recipe.RECIPE_EDIT_EXTRA, selectedRecipe.getId());
-                startActivity(viewRecipeIntent);
-            }
-        });
+        recipeAdapter = new RecipeAdapter(RecipeLibraryActivity.this, recipeLibrary.nonDeletedRecipes());
+        recipeListView.setAdapter(recipeAdapter);
     }
 
     public void newRecipe(View view) {
