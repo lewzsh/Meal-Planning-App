@@ -1,35 +1,70 @@
 package com.zybooks.mealplanningapp;
 
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class RecipeAdapter extends ArrayAdapter<Recipe> {
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
-    public RecipeAdapter(Context context, List<Recipe> recipes) {
-        super(context, 0, recipes);
+    private ArrayList<Recipe> recipeArrayList;
+    private Context context;
+
+    public RecipeAdapter(Context context, ArrayList<Recipe> recipeArrayList) {
+        this.recipeArrayList = recipeArrayList;
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-        Recipe recipe = getItem(position);
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.recipe_card, parent, false);
-        }
-        TextView title = convertView.findViewById(R.id.cardTitle);
-
-        title.setText(recipe.getTitle());
-
-        return convertView;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_card, parent, false);
+        return new ViewHolder(view);
     }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // on below line we are setting data
+        // to our views of recycler view item.
+        Recipe recipe = recipeArrayList.get(position);
+        holder.titleTV.setText(recipe.getTitle());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // on below line we are calling an intent.
+                Intent i = new Intent(context, RecipeDetailActivity.class);
+                i.putExtra(Recipe.RECIPE_EDIT_ID, recipe.getId());
+
+                // starting our activity.
+                context.startActivity(i);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return recipeArrayList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView titleTV;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            titleTV = itemView.findViewById(R.id.cardTitle);
+        }
+    }
+
 }

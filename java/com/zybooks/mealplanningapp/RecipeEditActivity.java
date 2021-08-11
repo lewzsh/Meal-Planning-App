@@ -8,11 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class RecipeEditActivity extends AppCompatActivity {
 
     private EditText titleEditText, ingredientsEditText, instructionsEditText;
     private Button deleteButton;
     private Recipe selectedRecipe;
+    private SQLiteManager dbManager;
+    private RecipeListHandler recipeLibrary;
+    private ArrayList<Recipe> recipeArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +32,17 @@ public class RecipeEditActivity extends AppCompatActivity {
         ingredientsEditText = findViewById(R.id.ingredientsEditText);
         instructionsEditText = findViewById(R.id.instructionsEditText);
         deleteButton = findViewById(R.id.deleteRecipeButton);
+
+        dbManager = SQLiteManager.instanceOfDatabase(this);
+        recipeArrayList = dbManager.populateRecipeListArray();
+        recipeLibrary = new RecipeListHandler(recipeArrayList);
     }
 
     private void checkForEditRecipe() {
         Intent previousIntent = getIntent();
 
-        int passedRecipeId = previousIntent.getIntExtra(Recipe.RECIPE_EDIT_EXTRA, -1);
-        selectedRecipe = Recipe.getRecipeForID(passedRecipeId);
+        int passedRecipeId = previousIntent.getIntExtra(Recipe.RECIPE_EDIT_ID, -1);
+        selectedRecipe = recipeLibrary.getRecipeForID(passedRecipeId);
 
         if (selectedRecipe != null) {
             titleEditText.setText(selectedRecipe.getTitle());
@@ -46,34 +55,33 @@ public class RecipeEditActivity extends AppCompatActivity {
     }
 
     public void saveRecipe(View view) {
-
-        SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
-        String title = String.valueOf(titleEditText.getText());
-        String ingredients = String.valueOf(ingredientsEditText.getText());
-        String instructions = String.valueOf(instructionsEditText.getText());
+        String newtitle = String.valueOf(titleEditText.getText());
+        String newingredients = String.valueOf(ingredientsEditText.getText());
+        String newinstructions = String.valueOf(instructionsEditText.getText());
 
         if (selectedRecipe == null) {
-            int id = Recipe.recipeArrayList.size();
-            Recipe newRecipe = new Recipe(id, title, ingredients, instructions);
-            Recipe.recipeArrayList.add(newRecipe);
-            sqLiteManager.addRecipeToDatabase(newRecipe);
+            dbManager.addRecipeToDatabase(newtitle, newingredients, newinstructions);
         }
         else {
-            selectedRecipe.setTitle(title);
-            selectedRecipe.setIngredients(ingredients);
-            selectedRecipe.setInstructions(instructions);
-            sqLiteManager.updateRecipeInDB(selectedRecipe);
+            int recipeId = selectedRecipe.getId();
+            dbManager.updateRecipeInDB(recipeId, newtitle, newingredients, newinstructions, 0);
         }
 
-        finish();
+        Intent i = new Intent(RecipeEditActivity.this, RecipeLibraryActivity.class);
+        startActivity(i);
     }
 
     public void deleteRecipe(View view) {
+        int recipeId = selectedRecipe.getId();
+        String title = selectedRecipe.getTitle();
+        String ingredients = selectedRecipe.getIngredients();
+        String instructions = selectedRecipe.getInstructions();
 
         selectedRecipe.setDeleted(true);
-        SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
-        sqLiteManager.updateRecipeInDB(selectedRecipe);
+        dbManager.updateRecipeInDB(recipeId, title, ingredients, instructions, 1);
 
-        finish();
+
+        Intent i = new Intent(RecipeEditActivity.this, RecipeLibraryActivity.class);
+        startActivity(i);
     }
 }

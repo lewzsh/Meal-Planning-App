@@ -26,16 +26,6 @@
             android:layout_gravity="start"
             android:onClick="goBackToLibrary"/>
 
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            android:textSize="35sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_gravity="center" />
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,65 +42,108 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <androidx.constraintlayout.utils.widget.MockView
+                android:id="@+id/mockView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
 
             <TextView
+                android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@string/ingredients"
-                android:textSize="25sp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Title"
+                android:textSize="35sp"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/mockView"/>
+
+            <TextView
+                android:id="@+id/ingredientsTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/ingredients"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+                tools:layout_editor_absoluteX="0dp" />
 
             <TextView
                 android:id="@+id/ingredientsListTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="ingredients list here" />
+                android:layout_marginTop="5dp"
+                android:text="ingredients list here"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsTV"
+                tools:layout_editor_absoluteX="16dp" />
 
             <TextView
+                android:id="@+id/instructionsTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/instructions"
-                android:textSize="25sp"
-                android:layout_marginTop="20dp"
                 android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsListTextView"
+                tools:layout_editor_absoluteX="0dp" />
 
             <TextView
                 android:id="@+id/instructionsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="instructions go here" />
+                android:layout_marginTop="5dp"
+                android:text="instructions go here"
+                app:layout_constraintTop_toBottomOf="@+id/instructionsTV"
+                tools:layout_editor_absoluteX="83dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/makeRecipeTV"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:layout_marginTop="10dp"
                 android:text="Make this recipe?"
-                android:textSize="25sp"
-                android:layout_marginTop="20dp"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/instructionsTextView" />
 
-            <DatePicker
-                android:id="@+id/datePicker"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/makeRecipeButton"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:headerBackground="@color/light_green"/>
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/white"
+                android:onClick="makeRecipe"
+                android:text="Yes!"
+                android:textColor="@color/orange"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/makeRecipeTV" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </LinearLayout>
