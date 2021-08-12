@@ -1,6 +1,9 @@
 # Meal Planning App
 Android app for meal planning.
 
+## Sprint board:
+https://trello.com/b/vl0cvDEP/meal-plan-app-sprints
+
 ## Team members:
 - Lewis Sibila
 - Purva Rohan Dalvi
