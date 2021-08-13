@@ -14,11 +14,9 @@
         android:layout_weight="1"
         android:text="Recipe Library"
         android:textSize="36sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:textStyle="bold"
-        android:backgroundTint="@color/dark_red"
-        android:onClick="openRecipeLibrary" />
+        android:backgroundTint="@color/dark_green"
+        android:onClick="openRecipeLibrary"/>
 
     <Button
         android:id="@+id/newRecipeButton"
@@ -27,10 +25,8 @@
         android:layout_weight="1"
         android:text="Add Recipe"
         android:textSize="36sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:textStyle="bold"
-        android:backgroundTint="@color/dark_red"
+        android:backgroundTint="@color/green"
         android:onClick="addNewRecipe"/>
 
     <Button
@@ -39,11 +35,9 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Grocery List"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:backgroundTint="@color/dark_red"
+        android:backgroundTint="@color/light_green"
         android:onClick="openGroceryList"/>
 
 </LinearLayout>

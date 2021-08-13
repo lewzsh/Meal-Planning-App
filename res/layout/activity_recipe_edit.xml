@@ -11,31 +11,30 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_red"
         android:minHeight="?actionBarSize"
-        android:padding="5dp"
-        android:theme="?actionBarTheme">
+        android:theme="?actionBarTheme"
+        android:background="@color/dark_green">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:text="@string/edit_recipe"
+            android:textSize="35sp"
             android:textColor="@color/white"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="start" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/white"
-            android:onClick="saveRecipe"
             android:text="@string/save"
+            android:textSize="15sp"
+            android:backgroundTint="@color/orange"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:onClick="saveRecipe"
+            android:layout_marginEnd="5dp"/>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -48,12 +47,12 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp">
 
-<!--            <androidx.constraintlayout.utils.widget.MockView-->
-<!--                android:id="@+id/mockView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="200dp"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                tools:layout_editor_absoluteX="0dp" />-->
+            <androidx.constraintlayout.utils.widget.MockView
+                android:id="@+id/mockView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
 
             <TextView
                 android:id="@+id/titleETV"
@@ -66,20 +65,20 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/mockView"/>
 
             <EditText
                 android:id="@+id/titleEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:autofillHints="@string/add_recipe_name"
                 android:hint="@string/add_recipe_name"
-                android:padding="12dp"
-                app:layout_constraintBottom_toTopOf="@+id/ingredientsETV"
+                android:padding="5dp"
+                app:layout_constraintBaseline_toBaselineOf="@id/titleETV"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/titleETV"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/mockView" />
 
             <TextView
                 android:id="@+id/ingredientsETV"
@@ -97,11 +96,11 @@
                 android:id="@+id/ingredientsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:layout_marginTop="5dp"
-                android:padding="12dp"
-                android:autofillHints="@string/add_ingredients"
                 android:hint="@string/add_ingredients"
-                app:layout_constraintTop_toBottomOf="@+id/ingredientsETV" />
+                android:autofillHints="@string/add_ingredients"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsETV"/>
 
             <TextView
                 android:id="@+id/instructionsETV"
@@ -119,7 +118,7 @@
                 android:id="@+id/instructionsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
+                android:padding="5dp"
                 android:hint="@string/add_instructions"
                 android:autofillHints="@string/add_instructions"
                 app:layout_constraintTop_toBottomOf="@+id/instructionsETV"/>
@@ -130,13 +129,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/white"
                 android:onClick="deleteRecipe"
                 android:text="@string/delete"
-                android:textColor="@color/dark_red"
-                android:textSize="20sp"
+                android:textColor="@color/orange"
+                android:textSize="25sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/instructionsEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/instructionsEditText"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -10,50 +10,44 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_red"
         android:minHeight="?actionBarSize"
-        android:padding="5dp"
-        android:theme="?actionBarTheme">
+        android:theme="?actionBarTheme"
+        android:background="@color/green">
 
         <Button
             android:id="@+id/menuButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:backgroundTint="@color/white"
-            android:onClick="goToMenu"
             android:text="menu"
+            android:textSize="15sp"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="start"
+            android:onClick="goToMenu"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="Recipes"
-            android:textColor="@color/white"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
 
         <Button
             android:id="@+id/newRecipeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:onClick="newRecipe"
-            android:backgroundTint="@color/white"
             android:text="+"
-            android:layout_marginRight="10dp"
+            android:textSize="35sp"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:onClick="newRecipe"/>
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipeListView"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"/>
