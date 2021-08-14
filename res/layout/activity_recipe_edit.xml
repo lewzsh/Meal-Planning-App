@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/dark_red"
         android:minHeight="?actionBarSize"
-        android:padding="5dp"
+        android:padding="10dp"
         android:theme="?actionBarTheme">
 
         <TextView
@@ -126,16 +126,20 @@
 
             <Button
                 android:id="@+id/deleteRecipeButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/beige"
                 android:onClick="deleteRecipe"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="@string/delete"
                 android:textColor="@color/dark_red"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/instructionsEditText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
