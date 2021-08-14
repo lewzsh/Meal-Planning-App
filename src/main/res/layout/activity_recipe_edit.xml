@@ -84,13 +84,13 @@
                 android:id="@+id/ingredientsETV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:padding="5dp"
                 android:text="@string/ingredients"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/titleETV"/>
+                app:layout_constraintTop_toBottomOf="@+id/titleETV" />
 
             <EditText
                 android:id="@+id/ingredientsEditText"
@@ -137,6 +137,22 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/instructionsEditText"/>
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="100dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="274dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="526dp"
+                android:text="Button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/ingredientsETV"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

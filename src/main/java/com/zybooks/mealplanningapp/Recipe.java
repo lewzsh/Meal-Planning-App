@@ -2,6 +2,7 @@ package com.zybooks.mealplanningapp;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class Recipe {
 
@@ -19,6 +20,23 @@ public class Recipe {
         this.ingredients = ingredients;
         this.instructions = instructions;
         this.deleted = deleted;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return id == recipe.id &&
+                deleted == recipe.deleted &&
+                title.equals(recipe.title) &&
+                ingredients.equals(recipe.ingredients) &&
+                instructions.equals(recipe.instructions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, ingredients, instructions, deleted);
     }
 
     public Recipe(int id, String title, String ingredients, String instructions) {
