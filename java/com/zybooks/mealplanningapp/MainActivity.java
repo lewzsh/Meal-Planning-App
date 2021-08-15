@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openGroceryList(View view) {
-//        FIXME: Add grocery list intent after adding activity
+        Intent groceryListIntent = new Intent(this, GroceryActivity.class);
+        startActivity(groceryListIntent);
     }
 }

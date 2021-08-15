@@ -62,5 +62,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
     }
 
     public void makeRecipe(View view) {
+        Intent makeRecipeIntent = new Intent(getApplicationContext(), GroceryActivity.class);
+        makeRecipeIntent.putExtra("INGREDIENTS", selectedRecipe.getIngredients());
+        startActivity(makeRecipeIntent);
     }
 }
