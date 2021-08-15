@@ -1,28 +1,27 @@
 package com.zybooks.mealplanningapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GroceryActivity extends AppCompatActivity {
 
-    private final String KEY_SAVED_LIST = "currentListItems";
-
     private GroceryAdapter itemsAdapter;
     private ArrayList<String> items;
+    private SharedPreferences savedGroceryListSP;
 
     private EditText userInput;
     private ListView groceryListView;
@@ -44,51 +43,73 @@ public class GroceryActivity extends AppCompatActivity {
             }
         });
 
-        // Restore state
-        if (savedInstanceState != null) {
-            items = savedInstanceState.getStringArrayList(KEY_SAVED_LIST);
+        items = new ArrayList<>();
+    }
+
+    private void checkForRecipeExtra() {
+        Intent previousIntent = getIntent();
+
+        String passedIngredients = previousIntent.getStringExtra("INGREDIENTS");
+
+        if (passedIngredients != null) {
+            ArrayList<String> ingredientsToAdd = convertStrToAL(passedIngredients, "\n");
+            for (String ingredient : ingredientsToAdd) {
+                items.add(ingredient);
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        savedGroceryListSP = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = savedGroceryListSP.edit();
+
+        String saveString;
+        if (items.size() > 0) {
+            saveString = convertALToString(items, "\n").trim();
         }
         else {
-            items = new ArrayList<>();
+            saveString = null;
+        }
+        editor.putString("listItems", saveString);
+        editor.apply();
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        // Import saved values
+        savedGroceryListSP = getPreferences(Context.MODE_PRIVATE);
+        String strList = savedGroceryListSP.getString("listItems", null);
+
+        if (strList != null) {
+            this.items = convertStrToAL(strList, "\n");
         }
 
+        checkForRecipeExtra();
         setGroceryAdapter();
-        SetUpListViewListener();
-    }
 
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putStringArrayList(KEY_SAVED_LIST, items);
-    }
-
-    @Override
-    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        items = savedInstanceState.getStringArrayList(KEY_SAVED_LIST);
-        setGroceryAdapter();
     }
 
     public void setGroceryAdapter() {
-        itemsAdapter = new GroceryAdapter(this, items);
+        itemsAdapter = new GroceryAdapter(this, items, new DelBtnClickListener() {
+            @Override
+            public void onBtnClick(int position) {
+                deleteItem(position);
+            }
+        });
         groceryListView.setAdapter(itemsAdapter);
     }
 
-    // FIXME: change to use delete button, not long click
-    private void SetUpListViewListener() {
-        groceryListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
-                Context context = getApplicationContext();
-                Toast.makeText(context, "Item Removed", Toast.LENGTH_LONG).show();
+    public void deleteItem(int ingredientPosID) {
+        items.remove(ingredientPosID);
+        itemsAdapter.notifyDataSetChanged();
 
-                items.remove(i);
-                itemsAdapter.notifyDataSetChanged();
-                return true;
-                //Since we're using the long text adapter we need to return a boolean and return true
-
-            }
-        });
+        Context context = getApplicationContext();
+        Toast.makeText(context, "Item Removed", Toast.LENGTH_SHORT).show();
     }
 
     private void addItem(View view) {
@@ -101,8 +122,32 @@ public class GroceryActivity extends AppCompatActivity {
             userInput.setText("");
         }
         else{
-            Toast.makeText(getApplicationContext(), "Please enter text...", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "Please enter text...", Toast.LENGTH_LONG).show();
         }
 
     }
+
+    public void goBackToMenu(View view) {
+        Intent goToMenu = new Intent(this, MainActivity.class);
+        startActivity(goToMenu);
+    }
+
+    public String convertALToString(ArrayList<String> givenArrayList, String delimiter) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < givenArrayList.size(); ++i) {
+            str.append(givenArrayList.get(i) + delimiter);
+        }
+        String newString = str.toString();
+
+        return newString;
+    }
+
+    public ArrayList<String> convertStrToAL(String givenString, String delimiter) {
+        String[] strSplit = givenString.split(delimiter);
+        List<String> fixedList = Arrays.asList(strSplit);
+        ArrayList<String> newArrayList = new ArrayList<>(fixedList);
+
+        return newArrayList;
+    }
+
 }

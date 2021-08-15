@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,8 +17,13 @@ import java.util.ArrayList;
 
 public class GroceryAdapter extends ArrayAdapter<String> {
 
-    public GroceryAdapter(Context context, ArrayList<String> ingredients) {
+    private ArrayList<String> ingredients;
+    private Context context;
+    private DelBtnClickListener delClkListener = null;
+
+    public GroceryAdapter(Context context, ArrayList<String> ingredients, DelBtnClickListener listener) {
         super(context, 0, ingredients);
+        delClkListener = listener;
     }
 
     @NonNull
@@ -28,14 +34,23 @@ public class GroceryAdapter extends ArrayAdapter<String> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.grocery_item, parent, false);
         }
-        TextView groceryItem = convertView.findViewById(R.id.groceryItemTextView);
+        TextView groceryItemText = convertView.findViewById(R.id.groceryItemTextView);
         Button deleteButton = convertView.findViewById(R.id.delGroceryItemButton);
-        CheckBox groceryCheck = convertView.findViewById(R.id.groceryItemCheckBox);
+        deleteButton.setTag(position);
 
-        groceryItem.setText(ingredient);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (delClkListener != null) {
+                    delClkListener.onBtnClick((Integer) v.getTag());
+                }
+            }
+        });
+        groceryItemText.setText(ingredient);
 
         return convertView;
 
     }
+
 
 }
