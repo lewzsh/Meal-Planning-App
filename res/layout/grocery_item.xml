@@ -27,6 +27,8 @@
         android:id="@+id/delGroceryItemButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
         android:text="X" />
 
 </LinearLayout>
