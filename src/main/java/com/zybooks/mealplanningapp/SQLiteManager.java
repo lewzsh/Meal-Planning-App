@@ -6,10 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.zybooks.mealplanningapp.utils.SqlTableUtils;
-
 import java.util.ArrayList;
 
+import com.zybooks.mealplanningapp.utils.SqlTableUtils;
 import static com.zybooks.mealplanningapp.utils.SqlTableUtils.*;
 
 public class SQLiteManager extends SQLiteOpenHelper {
@@ -51,7 +50,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         contentValues.put(RECIPE_DELETED_FIELD, deleted);
         return contentValues;
     }
-
+  
     public void addRecipeToDatabase(String title, String ingredients, String instructions) {
 
         // on below line we are creating a variable for
@@ -77,24 +76,6 @@ public class SQLiteManager extends SQLiteOpenHelper {
         db.update(RECIPE_TABLE_NAME, contentValues, RECIPE_ID_FIELD + " =? ", new String[]{ String.valueOf(id) });
         db.close();
     }
-
-    /*class ChildAccount extends Account {
-        double getInterestRate(int account_id) {
-            Account account = getAccountInfo(account_id);
-            return account.getInterestRate();
-        }
-
-        public double calculateInterest(int period, int amount, int account_id) {
-            double interestRate = getInterestRate(account_id);
-            boolean isVipAccount = getAccountStatus(account_id);
-            if(isVipAccount && interestRate > 5.0) {
-                interestRate = 5.0;
-            }
-            return amount*interestRate*period;
-
-        }
-
-    }*/
 
     public ArrayList<Recipe> populateRecipeListArray() {
         SQLiteDatabase db = this.getReadableDatabase();

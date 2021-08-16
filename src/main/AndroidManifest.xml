@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zybooks.mealplanningapp">
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,10 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MealPlanningApp">
-        <activity android:name=".RecipeEditActivity" />
-        <activity android:name=".RecipeLibraryActivity" />
-        <activity android:name=".RecipeDetailActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".GroceryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RecipeEditActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RecipeLibraryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RecipeDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,5 +26,4 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>
