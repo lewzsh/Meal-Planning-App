@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:minHeight="?actionBarSize"
         android:theme="?actionBarTheme"
-        android:background="@color/dark_green">
+        android:background="@color/dark_red">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Back"
             android:textSize="15sp"
-            android:backgroundTint="@color/orange"
+            android:backgroundTint="@color/beige"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_gravity="start"
