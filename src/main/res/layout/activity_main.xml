@@ -11,6 +11,7 @@
         android:id="@+id/recipeLibraryButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_weight="1"
@@ -23,11 +24,11 @@
         android:textSize="36sp"
         android:textStyle="bold" />
 
-
     <Button
         android:id="@+id/newRecipeButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:backgroundTint="@color/dark_red"
@@ -46,6 +47,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Grocery List"
+
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:paddingBottom="50dp"

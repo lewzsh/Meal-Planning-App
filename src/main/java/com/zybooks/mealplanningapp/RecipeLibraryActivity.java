@@ -60,5 +60,4 @@ public class RecipeLibraryActivity extends AppCompatActivity {
         super.onResume();
         setRecipeAdapter();
     }
-
 }

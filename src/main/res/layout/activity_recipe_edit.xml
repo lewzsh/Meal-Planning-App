@@ -11,6 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:background="@color/dark_red"
         android:minHeight="?actionBarSize"
         android:padding="10dp"
@@ -19,6 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_gravity="start"
             android:text="@string/edit_recipe"
             android:textColor="@color/white"
@@ -28,6 +30,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_gravity="end"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/white"
@@ -48,6 +51,7 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp">
 
+
 <!--            <androidx.constraintlayout.utils.widget.MockView-->
 <!--                android:id="@+id/mockView"-->
 <!--                android:layout_width="match_parent"-->
@@ -66,12 +70,14 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center"
+
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <EditText
                 android:id="@+id/titleEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="5dp"
                 android:autofillHints="@string/add_recipe_name"
                 android:hint="@string/add_recipe_name"
@@ -85,18 +91,21 @@
                 android:id="@+id/ingredientsETV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="10dp"
                 android:padding="5dp"
                 android:text="@string/ingredients"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold"
+
                 app:layout_constraintTop_toBottomOf="@+id/titleETV"/>
 
             <EditText
                 android:id="@+id/ingredientsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="5dp"
                 android:padding="12dp"
                 android:autofillHints="@string/add_ingredients"
@@ -119,6 +128,7 @@
                 android:id="@+id/instructionsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:padding="12dp"
                 android:hint="@string/add_instructions"
                 android:autofillHints="@string/add_instructions"
@@ -126,6 +136,7 @@
 
             <Button
                 android:id="@+id/deleteRecipeButton"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
