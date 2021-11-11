@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 public class RecipeLibraryActivity extends AppCompatActivity {
 
     private RecipeListHandler recipeLibrary;
@@ -20,6 +20,8 @@ public class RecipeLibraryActivity extends AppCompatActivity {
     private RecipeAdapter recipeAdapter;
     private RecyclerView recipeListView;
     private ArrayList<Recipe> recipeArrayList;
+//    add alt text view
+    private TextView AltText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,13 @@ public class RecipeLibraryActivity extends AppCompatActivity {
         dbManager = SQLiteManager.instanceOfDatabase(this);
         recipeArrayList = dbManager.populateRecipeListArray();
         recipeLibrary = new RecipeListHandler(recipeArrayList);
-
+//show alternate text starts here:
+        if (recipeLibrary == null) {
+            AltText = findViewById(R.id.altText);
+        } else {
         recipeAdapter = new RecipeAdapter(RecipeLibraryActivity.this, recipeLibrary.nonDeletedRecipes());
         recipeListView.setAdapter(recipeAdapter);
+        }
     }
 
     public void newRecipe(View view) {
